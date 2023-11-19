@@ -64,8 +64,8 @@ function addWeatherToPage(data) {
   const iconUrl = iconMap[iconCode] || iconMap.default;
 
   const weather = document.createElement("div");
-  weather.classList.add("weather", "weather-box"); // Add "weather-box" class
-  weather.style.backgroundImage = `url(${iconUrl})`; // Set the background image
+  weather.classList.add("weather", "weather-box");
+  weather.style.backgroundImage = `url(${iconUrl})`;
 
   weather.innerHTML = `
       <h2>${temp}°C</h2>
