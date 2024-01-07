@@ -4,45 +4,30 @@ const main = document.getElementById("main");
 const form = document.getElementById("form");
 const search = document.getElementById("search");
 
+const iconBaseUrl = "http://openweathermap.org/img/wn/";
+const iconExtension = "@2x.png";
+
 const iconMap = {
-    "01d":
-      "https://th.bing.com/th/id/OIG.Y7hTveYbM8CgTgRVLO1c?w=270&h=270&c=6&r=0&o=5&dpr=3&pid=ImgGn",
-    "01n":
-      "https://th.bing.com/th/id/OIG.Fcjg.230ycMBTGJygkQs?w=270&h=270&c=6&r=0&o=5&dpr=3&pid=ImgGn",
-    "02d":
-      "https://th.bing.com/th/id/OIG.tE.BPgAzdojUgCX14htW?w=270&h=270&c=6&r=0&o=5&dpr=3&pid=ImgGn",
-    "02n":
-      "https://th.bing.com/th/id/OIG.dpC27ptwC7fvER1rc2MD?w=270&h=270&c=6&r=0&o=5&dpr=3&pid=ImgGn",
-    "03d":
-      "https://th.bing.com/th/id/OIG.u5T70.bc5VW7bWacTZmL?w=270&h=270&c=6&r=0&o=5&dpr=3&pid=ImgGn",
-    "03n":
-      "https://th.bing.com/th/id/OIG.qWhrrhi4PqWnSJOPi6r2?w=270&h=270&c=6&r=0&o=5&dpr=3&pid=ImgGn",
-    "04d": "https://th.bing.com/th/id/OIG.UtrjcNvngHbaANLI762Z?pid=ImgGn",
-    "04n":
-      "https://th.bing.com/th/id/OIG.FUb9P8E5xi01sxZNazoB?w=270&h=270&c=6&r=0&o=5&dpr=3&pid=ImgGn",
-    "09d":
-      "https://th.bing.com/th/id/OIG.TzgfIziXZPS0bqMUHJbm?w=270&h=270&c=6&r=0&o=5&dpr=3&pid=ImgGn",
-    "09n":
-      "https://th.bing.com/th/id/OIG.htZKPziPBOnPTSrTkXUb?w=270&h=270&c=6&r=0&o=5&dpr=3&pid=ImgGn",
-    "10d":
-      "https://th.bing.com/th/id/OIG.4KhCeQ8SAyP2TPQ3zq4_?w=270&h=270&c=6&r=0&o=5&dpr=3&pid=ImgGn",
-    "10n":
-      "https://th.bing.com/th/id/OIG.2N8_thYcGYwBojrsnSdy?w=270&h=270&c=6&r=0&o=5&dpr=3&pid=ImgGn",
-    "11d":
-      "https://th.bing.com/th/id/OIG.d8H65BQt3YCjC1137fgt?w=270&h=270&c=6&r=0&o=5&dpr=3&pid=ImgGn",
-    "11n":
-      "https://th.bing.com/th/id/OIG.Fk2ngbQzINxG.HFZ6xWR?w=270&h=270&c=6&r=0&o=5&dpr=3&pid=ImgGn",
-    "13d":
-      "https://th.bing.com/th/id/OIG.GxiSEaNq3Yu.YolhTNja?w=270&h=270&c=6&r=0&o=5&dpr=3&pid=ImgGn",
-    "13n":
-      "https://th.bing.com/th/id/OIG.cpFpqx5HayQNSc.Uru96?w=270&h=270&c=6&r=0&o=5&dpr=3&pid=ImgGn",
-    "50d":
-      "https://th.bing.com/th/id/OIG.D6UAJiW2PRlA49rw9VdE?w=270&h=270&c=6&r=0&o=5&dpr=3&pid=ImgGn",
-    "50n":
-      "https://th.bing.com/th/id/OIG.iHb3bXgvfls8CNfsgu.0?w=270&h=270&c=6&r=0&o=5&dpr=3&pid=ImgGn",
-    default:
-      "https://th.bing.com/th/id/OIG.BoPSqlmoUExcgIHQUSIh?w=270&h=270&c=6&r=0&o=5&dpr=3&pid=ImgGn",
-  };
+  "01d": iconBaseUrl + "01d" + iconExtension,
+  "01n": iconBaseUrl + "01n" + iconExtension,
+  "02d": iconBaseUrl + "02d" + iconExtension,
+  "02n": iconBaseUrl + "02n" + iconExtension,
+  "03d": iconBaseUrl + "03d" + iconExtension,
+  "03n": iconBaseUrl + "03n" + iconExtension,
+  "04d": iconBaseUrl + "04d" + iconExtension,
+  "04n": iconBaseUrl + "04n" + iconExtension,
+  "09d": iconBaseUrl + "09d" + iconExtension,
+  "09n": iconBaseUrl + "09n" + iconExtension,
+  "10d": iconBaseUrl + "10d" + iconExtension,
+  "10n": iconBaseUrl + "10n" + iconExtension,
+  "11d": iconBaseUrl + "11d" + iconExtension,
+  "11n": iconBaseUrl + "11n" + iconExtension,
+  "13d": iconBaseUrl + "13d" + iconExtension,
+  "13n": iconBaseUrl + "13n" + iconExtension,
+  "50d": iconBaseUrl + "50d" + iconExtension,
+  "50n": iconBaseUrl + "50n" + iconExtension,
+  default: iconBaseUrl + "01d" + iconExtension, // Default to a specific icon
+};
 
 const url = (city) =>
   `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
@@ -68,13 +53,13 @@ function addWeatherToPage(data) {
   weather.style.backgroundImage = `url(${iconUrl})`;
 
   weather.innerHTML = `
-      <h2>${temp}°C</h2>
-      <small>${data.weather[0].description}</small>
-      <p>Humidity: ${data.main.humidity}%</p>
-      <p>Wind Speed: ${data.wind.speed} m/s</p>
-      <p>Sunrise: ${new Date(data.sys.sunrise * 1000).toLocaleTimeString()}</p>
-      <p>Sunset: ${new Date(data.sys.sunset * 1000).toLocaleTimeString()}</p>
-    `;
+    <h2>${temp}°C</h2>
+    <small>${data.weather[0].description}</small>
+    <p>Humidity: ${data.main.humidity}%</p>
+    <p>Wind Speed: ${data.wind.speed} m/s</p>
+    <p>Sunrise: ${new Date(data.sys.sunrise * 1000).toLocaleTimeString()}</p>
+    <p>Sunset: ${new Date(data.sys.sunset * 1000).toLocaleTimeString()}</p>
+  `;
 
   main.innerHTML = "";
   main.appendChild(weather);
@@ -91,6 +76,3 @@ form.addEventListener("submit", (e) => {
     getWeatherByLocation(city);
   }
 });
-
-
-
