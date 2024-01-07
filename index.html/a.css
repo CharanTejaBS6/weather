@@ -59,10 +59,10 @@ input:focus {
   .weather h2 {
     font-size: 2.5rem;
     margin-bottom: 10px;
-    color: #000000;
+    color: #ffffff;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-weight: 600;
-    text-shadow: #ffffff 0.5px 0.5px 1px;
+    font-weight: 900;
+    text-shadow: #000000 0.5px 0.5px 1px;
   }
 
 .weather small {
