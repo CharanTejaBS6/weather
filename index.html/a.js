@@ -5,7 +5,7 @@ const form = document.getElementById("form");
 const search = document.getElementById("search");
 
 // Use the image directly in the project folder
-const defaultImageUrl = "./BingBack.jpeg";
+const defaultImageUrl = "./wB.avif";
 
 const url = (city) =>
   `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
